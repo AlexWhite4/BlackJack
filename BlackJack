@@ -146,7 +146,6 @@ var Button = function(config) {
     this.label = config.label || "Click";
     this.onClick = config.onClick || function() {};
 };
-
 Button.prototype.draw = function() {
     fill(255, 255, 255);
     rect(this.x, this.y, this.width, this.height, 48);
@@ -155,20 +154,17 @@ Button.prototype.draw = function() {
     textAlign(LEFT, TOP);
     text(this.label, this.x + 25, this.y + this.height / 4);
 };
-
 Button.prototype.isMouseInside = function() {
     return mouseX > this.x &&
         mouseX < (this.x + this.width) &&
         mouseY > this.y &&
         mouseY < (this.y + this.height);
 };
-
 Button.prototype.handleMouseClick = function() {
     if (this.isMouseInside()) {
         this.onClick();
     }
 };
-
 var Instructions = new Button({
     x: 29,
     y: 300,
@@ -179,7 +175,6 @@ var Instructions = new Button({
         }
     }
 });
-
 var startGame = new Button({
     x: 205, // Adjust the x-coordinate as needed
     y: 300, // Adjust the y-coordinate as needed
@@ -198,7 +193,6 @@ var startGame = new Button({
         }
     }
 });
-
 var Hit = new Button({
     x: 21,
     y: 150,
@@ -209,15 +203,12 @@ var Hit = new Button({
         if (gameRunning && currentScene === 2) {
             // Draw a new card
             var drawnCard = cards[Math.floor(Math.random() * cards.length)];
-
             // Update player's total
             playerTotal += drawnCard;
-
             // Check for special cases like the value of 11 (Ace)
             if (drawnCard === 11 && playerTotal > 21) {
                 playerTotal -= 10; // Convert Ace from 11 to 1
             }
-
             // Check if the player busted
             if (playerTotal > 21) {
                 money = money-100;
@@ -227,7 +218,6 @@ var Hit = new Button({
         }
     }
 });
-
 var Double = new Button({
     x: 21, // Adjust the x-coordinate as needed
     y: 216, // Adjust the y-coordinate as needed
@@ -236,7 +226,6 @@ var Double = new Button({
     onClick: function() {
         if (currentScene === 2 && gameRunning) {
              money *= 2;
-
             // Draw a card and add its value to playerTotal
             var drawnCard = cards[Math.floor(Math.random() * cards.length)];
             playerTotal += drawnCard;
@@ -255,7 +244,6 @@ var Double = new Button({
         }
     }
 });
-
 var Stand = new Button({
     x: 263, // Adjust the x-coordinate as needed
     y: 152, // Adjust the y-coordinate as needed
@@ -267,13 +255,11 @@ var Stand = new Button({
             while (dealerTotal < 17) {
                 var dealerCard = cards[Math.floor(Math.random() * cards.length)];
                 dealerTotal += dealerCard;
-
                 // Optionally, check for special cases like the value of 11 (Ace) for the dealer
                 if (dealerCard === 11 && dealerTotal > 21) {
                     dealerTotal -= 10; // Convert Ace from 11 to 1
                 }
             }
-
     if (dealerTotal > 21 || playerTotal > dealerTotal) {
         gameRunning= false;
         currentScene = 3;
@@ -293,7 +279,6 @@ var Stand = new Button({
     }
     }
 });
-
 var mouseClicked = function() {
      Instructions.handleMouseClick();
      startGame.handleMouseClick();
@@ -301,9 +286,8 @@ var mouseClicked = function() {
      Double.handleMouseClick();
      Stand.handleMouseClick();
   };
-
 var drawScene0 = function() {
-    background(0, 0, 0);
+    background(0, 4, 252);
     fill(255, 255, 255);
     if (currentScene === 0) {
         textSize(40);
@@ -314,7 +298,7 @@ var drawScene0 = function() {
         stroke(10, 10, 10);
         fill(255, 255, 255);
         text("Created by: Alex White, Ryan Conlan", 52, 210, 347, 314);
-        
+
 drawBitmoji(277,-11,42);
 drawBitmojiOne();
     }
@@ -340,7 +324,6 @@ var drawScene1 = function() {
         
     }
 };
-
 var drawScene2 = function() {
     background(255, 0, 0);
     fill(0, 0, 0);
