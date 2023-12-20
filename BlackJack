@@ -7,6 +7,137 @@ var playerTotal = 0;
 var dealerTotal = 0;
 var money = 100;
 var gameRunning = false;
+
+var bodyX=-32;
+var bodyY=0;
+var bodyHeight=50;
+
+var drawHead = function() {
+noStroke();
+fill (255, 229, 178);
+ellipse(bodyX+(bodyHeight/110*200),bodyY+(bodyHeight/110*125),bodyHeight/110*90,bodyHeight/110*110);//head
+};
+
+var drawEyes = function() {
+stroke(0, 0, 0);
+fill(255, 255, 255);
+ellipse(bodyX+(bodyHeight/110*180),bodyY+(bodyHeight/110*113),bodyHeight/110*20,bodyHeight/110*15);//left eye
+ellipse(bodyX+(bodyHeight/110*220),bodyY+(bodyHeight/110*113),bodyHeight/110*20,bodyHeight/110*15);//right eye
+noStroke();
+fill(125, 140, 201);
+ellipse(bodyX+(bodyHeight/110*180),bodyY+(bodyHeight/110*113),bodyHeight/110*5,bodyHeight/110*7); //left pupil
+ellipse(bodyX+(bodyHeight/110*220),bodyY+(bodyHeight/110*113),bodyHeight/110*5,bodyHeight/110*7);// right pupil
+};
+var drawSmile = function() {
+stroke(0, 0, 0);
+fill(255, 255, 255);
+arc(bodyX+(bodyHeight/110*200), bodyY+(bodyHeight/110*150), bodyHeight/110*48, bodyHeight/110*25, 1, 180);//Smile
+};
+var drawNose = function() {
+stroke(0, 0, 0);
+fill(255, 229, 178);
+bezier(bodyX+(bodyHeight/110*198),bodyY+(bodyHeight/110*122),bodyX+(bodyHeight/110*219),bodyY+(bodyHeight/110*142),bodyX+(bodyHeight/110*192),bodyY+(bodyHeight/110*134),bodyX+(bodyHeight/110*196),bodyY+(bodyHeight/110*134));//nose
+};
+
+var drawHair = function() {
+noStroke();
+fill(115, 66, 17);
+quad(bodyX+(bodyHeight/110*157),bodyY+(bodyHeight/110*100),bodyX+(bodyHeight/110*170),bodyY+(bodyHeight/110*77),bodyX+(bodyHeight/110*236),bodyY+(bodyHeight/110*85),bodyX+(bodyHeight/110*165),bodyY+(bodyHeight/110*99));//left hair
+
+quad(bodyX+(bodyHeight/110*243),bodyY+(bodyHeight/110*102),bodyX+(bodyHeight/110*230),bodyY+(bodyHeight/110*77),bodyX+(bodyHeight/110*186),bodyY+(bodyHeight/110*91),bodyX+(bodyHeight/110*243),bodyY+(bodyHeight/110*102));//right hair
+};
+
+var drawHat = function () {
+stroke(0, 0, 0);
+fill(0, 38, 255);
+ellipse(bodyX+(bodyHeight/110*200),bodyY+(bodyHeight/110*82),bodyHeight/110*50,bodyHeight/110*41);//hat brim
+ellipse(bodyX+(bodyHeight/110*200),bodyY+(bodyHeight/110*75),bodyHeight/110*75,bodyHeight/110*38);//hat 
+};
+
+var drawNeck = function() {
+noStroke();
+fill (255, 229, 178);
+rect(bodyX+(bodyHeight/110*190),bodyY+(bodyHeight/110*178),bodyHeight/110*19,bodyHeight/110*15,bodyHeight/110*0);//neck
+};
+var drawShirt = function() {
+fill(0, 0, 0);
+quad(bodyX+(bodyHeight/110*151),bodyY+(bodyHeight/110*179),bodyX+(bodyHeight/110*133),bodyY+(bodyHeight/110*250),bodyX+(bodyHeight/110*187),bodyY+(bodyHeight/110*251),bodyX+(bodyHeight/110*250),bodyY+(bodyHeight/110*194));//shirt
+quad(bodyX+(bodyHeight/110*249),bodyY+(bodyHeight/110*179),bodyX+(bodyHeight/110*270),bodyY+(bodyHeight/110*250),bodyX+(bodyHeight/110*187),bodyY+(bodyHeight/110*251),bodyX+(bodyHeight/110*175),bodyY+(bodyHeight/110*190));//shirt
+fill(255, 255, 255);
+textSize(20);
+text('RC',bodyX+(bodyHeight/110*173),bodyY+(bodyHeight/110*229));//letters on shirt
+};
+
+var drawBitmojiOne = function(x, y) { 
+    drawHead();
+    drawEyes();
+    drawSmile();
+    drawNose();
+    drawHair();
+    drawHat();
+    drawNeck();
+    drawShirt();
+};
+
+
+var drawBitmoji = function(bitmojiX,bitmojiY,bitmojiHeight){//shirt
+fill(5, 5, 5);
+arc(bitmojiX+(bitmojiHeight/100*114),bitmojiY+(bitmojiHeight/100*209),bitmojiHeight/100*120,bitmojiHeight/100*56,170,373);
+arc(bitmojiX+(bitmojiHeight/100*114),bitmojiY+(bitmojiHeight/100*214),bitmojiHeight/100*120,bitmojiHeight/100*22,-40,254);
+ellipse(bitmojiX+(bitmojiHeight/100*112),bitmojiY+(bitmojiHeight/100*250),bitmojiHeight/100*93,bitmojiHeight/100*175);
+fill(247, 244, 244);
+rect(bitmojiX+(bitmojiHeight/100*88),bitmojiY+(bitmojiHeight/100*239),bitmojiHeight/100*49,bitmojiHeight/100*26);
+line(bitmojiX+(bitmojiHeight/100*92),bitmojiY+(bitmojiHeight/100*264),bitmojiX+(bitmojiHeight/100*99),bitmojiY+(bitmojiHeight/100*247));
+line(bitmojiX+(bitmojiHeight/100*99),bitmojiY+(bitmojiHeight/100*247),bitmojiX+(bitmojiHeight/100*105),bitmojiY+(bitmojiHeight/100*264));
+line(bitmojiX+(bitmojiHeight/100*96),bitmojiY+(bitmojiHeight/100*256),bitmojiX+(bitmojiHeight/100*101),bitmojiY+(bitmojiHeight/100*256));
+line(bitmojiX+(bitmojiHeight/100*117),bitmojiY+(bitmojiHeight/100*263),bitmojiX+(bitmojiHeight/100*113),bitmojiY+(bitmojiHeight/100*248));
+line(bitmojiX+(bitmojiHeight/100*116),bitmojiY+(bitmojiHeight/100*264),bitmojiX+(bitmojiHeight/100*121),bitmojiY+(bitmojiHeight/100*256));
+line(bitmojiX+(bitmojiHeight/100*126),bitmojiY+(bitmojiHeight/100*264),bitmojiX+(bitmojiHeight/100*121),bitmojiY+(bitmojiHeight/100*257));
+line(bitmojiX+(bitmojiHeight/100*126),bitmojiY+(bitmojiHeight/100*263),bitmojiX+(bitmojiHeight/100*128),bitmojiY+(bitmojiHeight/100*248));
+point(bitmojiX+(bitmojiHeight/100*109),bitmojiY+(bitmojiHeight/100*263));
+point(bitmojiX+(bitmojiHeight/100*131),bitmojiY+(bitmojiHeight/100*263));
+//shorts
+fill(5,5,5);
+rect(bitmojiX+(bitmojiHeight/100*68),bitmojiY+(bitmojiHeight/100*266),bitmojiHeight/100*43,bitmojiHeight/100*90);
+rect(bitmojiX+(bitmojiHeight/100*114),bitmojiY+(bitmojiHeight/100*266),bitmojiHeight/100*43,bitmojiHeight/100*90);
+
+//arms
+fill(209, 134, 88);
+rect(bitmojiX+(bitmojiHeight/100*53),bitmojiY+(bitmojiHeight/100*214),bitmojiHeight/100*17,bitmojiHeight/100*80);
+rect(bitmojiX+(bitmojiHeight/100*157),bitmojiY+(bitmojiHeight/100*214),bitmojiHeight/100*17,bitmojiHeight/100*80);
+//Face
+fill (209, 134, 88);
+ellipse(bitmojiX+(bitmojiHeight/100*114),bitmojiY+(bitmojiHeight/100*153),bitmojiHeight/100*87,bitmojiHeight/100*136);
+
+//eyes
+fill(242, 241, 239);
+ellipse(bitmojiX+(bitmojiHeight/100*97),bitmojiY+(bitmojiHeight/100*133),bitmojiHeight/100*14,bitmojiHeight/100*14);//left 
+ellipse(bitmojiX+(bitmojiHeight/100*133),bitmojiY+(bitmojiHeight/100*133),bitmojiHeight/100*14,bitmojiHeight/100*14);//right 
+fill(5, 5, 5);
+ellipse(bitmojiX+(bitmojiHeight/100*132),bitmojiY+(bitmojiHeight/100*135),bitmojiHeight/100*4,bitmojiHeight/100*4);//right pupil 
+ellipse(bitmojiX+(bitmojiHeight/100*96),bitmojiY+(bitmojiHeight/100*135),bitmojiHeight/100*4,bitmojiHeight/100*4);//left pupil
+
+//mouth
+fill(242, 239, 242);
+arc(bitmojiX+(bitmojiHeight/100*114),bitmojiY+(bitmojiHeight/100*176),bitmojiHeight/100*54,bitmojiHeight/100*47,0,180);
+
+//nose
+fill(209, 134, 88);
+triangle(bitmojiX+(bitmojiHeight/100*98),bitmojiY+(bitmojiHeight/100*164),bitmojiX+(bitmojiHeight/100*118),bitmojiY+(bitmojiHeight/100*142),bitmojiX+(bitmojiHeight/100*122),bitmojiY+(bitmojiHeight/100*164));
+
+//beanie
+fill(5, 5, 5);
+arc(bitmojiX+(bitmojiHeight/100*115),bitmojiY+(bitmojiHeight/100*116),bitmojiHeight/100*85,bitmojiHeight/100*98,-191,14);
+line(bitmojiX+(bitmojiHeight/100*131),bitmojiY+(bitmojiHeight/100*114),bitmojiX+(bitmojiHeight/100*75),bitmojiY+(bitmojiHeight/100*122));
+line(bitmojiX+(bitmojiHeight/100*139),bitmojiY+(bitmojiHeight/100*118),bitmojiX+(bitmojiHeight/100*98),bitmojiY+(bitmojiHeight/100*118));
+line(bitmojiX+(bitmojiHeight/100*139),bitmojiY+(bitmojiHeight/100*115),bitmojiX+(bitmojiHeight/100*83),bitmojiY+(bitmojiHeight/100*121));
+line(bitmojiX+(bitmojiHeight/100*139),bitmojiY+(bitmojiHeight/100*118),bitmojiX+(bitmojiHeight/100*80),bitmojiY+(bitmojiHeight/100*116));
+
+//ears
+fill(209, 134, 88);
+arc(bitmojiX+(bitmojiHeight/100*156),bitmojiY+(bitmojiHeight/100*145),bitmojiHeight/100*18,bitmojiHeight/100*28,-104,113);
+arc(bitmojiX+(bitmojiHeight/100*72),bitmojiY+(bitmojiHeight/100*145),bitmojiHeight/100*17,bitmojiHeight/100*28,71,302);
+};
 var Button = function(config) {
     this.x = config.x || 0;
     this.y = config.y || 0;
@@ -183,6 +314,9 @@ var drawScene0 = function() {
         stroke(10, 10, 10);
         fill(255, 255, 255);
         text("Created by: Alex White, Ryan Conlan", 52, 210, 347, 314);
+        
+drawBitmoji(277,-11,42);
+drawBitmojiOne();
     }
 };
 
@@ -225,6 +359,7 @@ text(playerTotal,236,317);
 text("Dealer Total  =",25,50);
 text(dealerTotal,236,50);
 }};
+
 var drawScene3 = function() {
     if (currentScene === 3) {
         background(0, 0, 0);
@@ -240,6 +375,7 @@ var drawScene3 = function() {
         startGame.draw();
     }
 };
+
 var drawScene4 = function() {
     if (currentScene === 4) {
         background(0, 0, 0);
@@ -255,6 +391,7 @@ var drawScene4 = function() {
         startGame.draw();
     }
 };
+
 var drawScene5 = function() {
     if (currentScene === 5) {
        background(0, 0, 0);
@@ -270,6 +407,7 @@ var drawScene5 = function() {
         startGame.draw();
     }
 };
+
 draw = function() {
     if (currentScene === 0) {
         drawScene0();
